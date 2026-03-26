@@ -1,6 +1,5 @@
 import search from "../images/icon-search.svg";
 import React, { useRef } from "react";
-
 import styles from "./Input.module.css";
 
 const Input = (props) => {
@@ -14,12 +13,24 @@ const Input = (props) => {
 
   return (
     <form className={styles.form} onSubmit={searchUserHandler}>
-      <img src={search} alt="search icon" />
-      <input type="text" ref={choice} placeholder="Enter Github username..." />
-      <div>
-        <p className="error">{props.error}</p>
-        <button type="submit">Search</button>
+
+      <div className={styles.inputWrapper}>
+        <img src={search} alt="search icon" className={styles.icon} />
+
+        <input
+          type="text"
+          ref={choice}
+          placeholder="Search GitHub username..."
+          className={styles.input}
+        />
+
+        <button type="submit" className={styles.button}>
+          Search
+        </button>
       </div>
+
+      {props.error && <p className={styles.error}>{props.error}</p>}
+
     </form>
   );
 };
