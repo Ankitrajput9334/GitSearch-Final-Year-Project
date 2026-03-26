@@ -1,77 +1,91 @@
 import React from "react";
-
 import styles from "./Card.module.css";
 
-const Card = (props) => {
-  const date = new Date(props.user.created_at);
+const Card = ({ user }) => {
+  const date = new Date(user.created_at);
 
-  const checkInfo = (object, errorText = "Not Available", style = "") => {
-    if (object) {
-      return <p className={`available ${style && styles.bio}`}>{object}</p>;
-    } else {
-      return (
-        <p className={`not-available ${style && styles.bio}`}>{errorText}</p>
-      );
-    }
+  const checkInfo = (value, fallback = "Not Available") => {
+    return value ? (
+      <span className={styles.available}>{value}</span>
+    ) : (
+      <span className={styles.notAvailable}>{fallback}</span>
+    );
   };
 
   return (
     <div className={styles.card}>
-      <img src={props.user.avatar_url} className={styles.avatar} alt="" />
+
+      {/* 🖼️ AVATAR */}
+      <div className={styles.avatarWrapper}>
+        <img
+          src={user.avatar_url}
+          className={styles.avatar}
+          alt="avatar"
+        />
+      </div>
+
+      {/* 👤 NAME UNDER AVATAR */}
       <div className={styles.name}>
-        <h2>
-          <a className="available" href={`https://github.com/${props.user.login}`}>
-            {props.user.name}
-          </a>
-        </h2>
-        <p>
-          Joined
-          {` ${date.getDate()} ${date.toLocaleString("en-us", {
+        <h2>{user.name || user.login}</h2>
+        <p className={styles.username}>@{user.login}</p>
+
+        <p className={styles.joined}>
+          Joined{" "}
+          {`${date.getDate()} ${date.toLocaleString("en-us", {
             month: "short",
           })} ${date.getFullYear()}`}
         </p>
-        <h3>@{props.user.login}</h3>
+
+        <a
+          href={`https://github.com/${user.login}`}
+          target="_blank"
+          rel="noreferrer"
+          className={styles.githubBtn}
+        >
+          View Profile
+        </a>
       </div>
-      {checkInfo(props.user.bio, "This profile has no bio", "bio")}
-      <table className={styles["profile-info"]}>
-        <tbody>
-          <tr className={styles["table-header"]}>
-            <th>Repos</th>
-            <th>Followers</th>
-            <th>Following</th>
-          </tr>
-          <tr>
-            <th>{props.user.public_repos}</th>
-            <th>{props.user.followers}</th>
-            <th>{props.user.following}</th>
-          </tr>
-        </tbody>
-      </table>
+
+      {/* 📝 BIO */}
+      <p className={styles.bio}>
+        {user.bio || "This profile has no bio"}
+      </p>
+
+      {/* 📊 STATS */}
+      <div className={styles.stats}>
+        <div>
+          <span>Repos</span>
+          <h3>{user.public_repos}</h3>
+        </div>
+        <div>
+          <span>Followers</span>
+          <h3>{user.followers}</h3>
+        </div>
+        <div>
+          <span>Following</span>
+          <h3>{user.following}</h3>
+        </div>
+      </div>
+
+      {/* 📍 CONTACT */}
       <div className={styles.contact}>
-        <ul>
-          <li>
-            <img src="./images/icon-location.svg" alt="" />
-            {checkInfo(props.user.location)}
-          </li>
-          <li>
-            <img src="./images/icon-website.svg" alt="" />
-            {props.user.blog && (
-              <a href={props.user.blog} className="available">
-                {props.user.blog}
-              </a>
-            )}
-            {!props.user.blog && checkInfo(props.user.blog)}
-          </li>
-          <li>
-            <img src="./images/icon-twitter.svg" alt="" />
-            {checkInfo(props.user.twitter)}
-          </li>
-          <li>
-            <img src="./images/icon-company.svg" alt="" />
-            {checkInfo(props.user.company)}
-          </li>
-        </ul>
+        <p>📍 {checkInfo(user.location)}</p>
+
+        <p>
+          🔗{" "}
+          {user.blog ? (
+            <a href={user.blog} target="_blank" rel="noreferrer">
+              {user.blog}
+            </a>
+          ) : (
+            checkInfo(null)
+          )}
+        </p>
+
+        <p>🐦 {checkInfo(user.twitter_username)}</p>
+        <p>🏢 {checkInfo(user.company)}</p>
       </div>
+
     </div>
   );
 };

@@ -1,141 +1,194 @@
 .card {
+  position: relative;
+
   display: grid;
-  grid-template-columns: 80px 1fr;
-  grid-template-rows: repeat(4, auto);
-  grid-template-areas: "avatar name" "bio bio" "info info" "contact contact";
+  grid-template-columns: 100px 1fr;
+  grid-template-areas:
+    "avatar name"
+    "bio bio"
+    "info info"
+    "contact contact";
+
   width: 90%;
   max-width: 700px;
   margin: 0 auto;
   padding: 20px;
-  background-color: var(--card-color);
-  box-shadow: 0px 10px 37px -18px black;
-  border-radius: 10px;
+  gap: 15px;
+
+  /* Glass Effect */
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.1),
+    0 10px 35px rgba(0, 0, 0, 0.5);
+
+  transition: all 0.3s ease;
+  animation: fadeIn 0.6s ease;
+  overflow: hidden;
 }
 
-a:hover {
-  opacity: 0.7;
+/* Hover */
+.card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.1),
+    0 15px 45px rgba(0, 0, 0, 0.7);
+}
+
+/* Glow */
+.card::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: #3b82f6;
+  filter: blur(120px);
+  opacity: 0.2;
+  top: -50px;
+  left: -50px;
+  z-index: -1;
+}
+
+/* AVATAR */
+.avatarWrapper {
+  grid-area: avatar;
+  position: relative;
+  width: 100%;
+  height: 100px;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .avatar {
-  grid-area: avatar;
-  height: 70px;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
 }
 
+.card:hover .avatar {
+  transform: scale(1.08);
+}
+
+/* OVERLAY */
+.avatarOverlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 8px;
+
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.2),
+      transparent);
+
+  color: white;
+  font-size: 12px;
+}
+
+/* LIGHT MODE */
+body.light .avatarOverlay {
+  background: linear-gradient(to top,
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.3),
+      transparent);
+  color: black;
+}
+
+/* NAME */
 .name {
+  grid-area: name;
   display: flex;
   flex-direction: column;
-  grid-area: name;
-  color: var(--bio-color);
+  justify-content: center;
 }
 
-.name h2 {
-  color: var(--logo-color);
-}
-
-.name h3 {
-  order: 2;
-  color: var(--btn-color);
-}
-
-.name p {
-  order: 3;
-}
-
+/* BIO */
 .bio {
-  margin: 20px 0px 0px 0px;
   grid-area: bio;
   color: var(--bio-color);
+  line-height: 1.5;
 }
 
-.table-header {
-  font-weight: normal;
-}
-
-tr:not(:first-child) th {
-  font-weight: normal;
-}
-
-.profile-info {
+/* STATS */
+.stats {
   grid-area: info;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 12px;
+  border-radius: 12px;
+
+  background: linear-gradient(135deg,
+      rgba(59, 130, 246, 0.15),
+      rgba(99, 102, 241, 0.1));
+}
+
+.stats div {
   text-align: center;
-  column-gap: 10px;
-  border-radius: 10px;
-  margin: 20px 0;
-  padding: 10px 0;
-  color: var(--bio-color);
-  background-color: var(--bgc-color);
+  flex: 1;
 }
 
-.profile-info tr > * {
-  width: calc(100% / 3);
-}
-
+/* CONTACT */
 .contact {
   grid-area: contact;
 }
 
-.contact ul li {
-  display: grid;
-  grid-template-columns: 30px 1fr;
+.contact p {
+  margin: 6px 0;
+  opacity: 0.85;
+  transition: 0.2s;
 }
 
-.contact ul li:not(:last-child) {
-  margin-bottom: 8px;
+.contact p:hover {
+  opacity: 1;
+  transform: translateX(5px);
 }
 
-@media (min-width: 1024px) {
-  .contact ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
+/* TEXT FIX */
+h2,
+h3,
+p {
+  word-break: break-word;
 }
 
-@media (min-width: 1440px) {
+/* MOBILE */
+@media (max-width: 768px) {
   .card {
-    padding: 40px;
-    grid-template-columns: 140px 1fr;
-    grid-template-areas: "avatar name" "avatar bio" "avatar info" "avatar contact";
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "avatar"
+      "name"
+      "bio"
+      "info"
+      "contact";
   }
 
-  .bio {
-    margin: 0px 0px;
+  .avatarWrapper {
+    height: 200px;
   }
 
-  .name {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto auto;
-    grid-template-areas: "name date" "nick nick";
+  .stats {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
 
-  .name h2 {
-    grid-area: name;
-    font-size: 26px;
-    line-height: 38px;
-    margin-bottom: 5px;
-  }
-
-  .name h3 {
-    grid-area: nick;
-    order: 3;
-    font-size: 16px;
-    line-height: 24px;
-    margin-bottom: 5px;
-  }
-
-  .name p {
-    grid-area: date;
-    order: 2;
-  }
-
-  .avatar {
-    height: 120px;
-  }
-
-  .profile-info {
-    padding: 20px;
-    margin: 32px 0px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

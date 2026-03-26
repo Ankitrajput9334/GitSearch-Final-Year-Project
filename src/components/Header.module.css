@@ -8,10 +8,23 @@
   max-width: 700px;
 }
 
-.header h1 {
-  font-size: 28px;
-  color: var(--logo-color);
+.logo {
+  width: clamp(28px, 5vw, 50px);
+  height: auto;
 }
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* space between logo & text */
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
 
 @media (min-width: 1440px) {
   .header {
