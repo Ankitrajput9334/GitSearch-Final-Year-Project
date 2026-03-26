@@ -5,7 +5,10 @@ import Toggle from "./Toggle";
 const Header = () => {
   return (
     <header className={styles.header}>
-      <h1>GitSearch</h1>
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <img src={logo} alt="logo" style={{ width: "40px", height: "40px" }} />
+        <h1>GitSearch</h1>
+      </div>
       <Toggle />
     </header>
   );
