@@ -10,7 +10,7 @@ const Header = () => {
         alt="logo"
         style={{ width: "35px", filter: "invert(1)" }}
       />
-      <h1 style={{ margin: 0 }}>GitSearch</h1>
+      <h1 style={{ margin: 0 }}>Giearch</h1>
     </div>
   );
 };
