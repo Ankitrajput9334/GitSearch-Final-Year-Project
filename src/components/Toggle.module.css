@@ -10,8 +10,7 @@
 
 .toggle label {
   background: url("../images/icon-sun.svg") no-repeat;
-  filter: invert(0%) sepia(100%) saturate(15%) hue-rotate(237deg)
-    brightness(99%) contrast(104%);
+  filter: invert(0%) sepia(100%) saturate(15%) hue-rotate(237deg) brightness(99%) contrast(104%);
   cursor: pointer;
   display: inline-block;
   transition: all ease-in-out 0.3s;
@@ -19,19 +18,17 @@
   aspect-ratio: 1/1;
 }
 
-.toggle input[type="checkbox"]:checked ~ label {
+.toggle input[type="checkbox"]:checked~label {
   background: url("../images/icon-moon.svg") no-repeat;
-  filter: invert(100%) sepia(56%) saturate(0%) hue-rotate(241deg)
-    brightness(111%) contrast(100%);
+  filter: invert(100%) sepia(56%) saturate(0%) hue-rotate(241deg) brightness(111%) contrast(100%);
 }
 
 .toggle input[type="checkbox"]:checked {
   background: url("../images/icon-moon.svg") no-repeat;
-  filter: invert(100%) sepia(56%) saturate(0%) hue-rotate(241deg)
-    brightness(111%) contrast(100%);
+  filter: invert(100%) sepia(56%) saturate(0%) hue-rotate(241deg) brightness(111%) contrast(100%);
 }
 
-.toggle input[type="checkbox"]:checked ~ label::after {
+.toggle input[type="checkbox"]:checked~label::after {
   background-color: #0054b0;
   transform: translateX(50px);
 }

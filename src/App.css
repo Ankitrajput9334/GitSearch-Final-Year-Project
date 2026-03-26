@@ -21,13 +21,14 @@ h4 {
 }
 
 body {
-  --bgc-color: rgb(90, 90, 90);
+  --bgc-color: rgb(0, 0, 0);
   --card-color: #000000;
   --stats-color: #ffffff;
   --logo-color: #ffffff;
   --stats-color: #697c9a;
   --bio-color: #ffffff;
   --btn-color: #5a5959;
+  --theme-filter: invert(0%) sepia(100%) saturate(15%) hue-rotate(237deg) brightness(99%) contrast(104%);
   background-color: var(--bgc-color);
 }
 
@@ -38,8 +39,7 @@ body.light {
   --icon-color: #000000;
   --stats-color: #000000;
   --logo-color: black;
-  --theme-filter: invert(0%) sepia(100%) saturate(15%) hue-rotate(237deg)
-    brightness(99%) contrast(104%);
+  --theme-filter: invert(0%) sepia(100%) saturate(15%) hue-rotate(237deg) brightness(99%) contrast(104%);
   background-color: var(--bgc-color);
 }
 
