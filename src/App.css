@@ -20,27 +20,146 @@ h4 {
   font-weight: 400;
 }
 
-body {
-  --bgc-color: rgb(0, 0, 0);
-  --card-color: #000000;
-  --stats-color: #ffffff;
-  --logo-color: #ffffff;
-  --stats-color: #697c9a;
-  --bio-color: #ffffff;
-  --btn-color: #5a5959;
-  --theme-filter: invert(0%) sepia(100%) saturate(15%) hue-rotate(237deg) brightness(99%) contrast(104%);
-  background-color: var(--bgc-color);
+/* ========================= */
+/* 🔍 SEARCH BAR FIX */
+/* ========================= */
+
+/* LIGHT MODE */
+body.light input {
+  background: #f1f5f9;
+  /* soft gray */
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px;
 }
 
+/* DARK MODE */
+body.dark input {
+  background: rgba(255, 255, 255, 0.05);
+  color: #f9fafb;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* ========================= */
+/* 🌙 DARK MODE BASE */
+/* ========================= */
+body.dark {
+  background: #020617;
+  color: #f9fafb;
+
+  --text-main: #f9fafb;
+  --text-secondary: #9ca3af;
+}
+
+/* ========================= */
+/* ☀️ LIGHT MODE BASE */
+/* ========================= */
 body.light {
-  --bgc-color: #f6f8ff;
-  --card-color: #fefefe;
-  --bio-color: #000000;
-  --icon-color: #000000;
-  --stats-color: #000000;
-  --logo-color: black;
-  --theme-filter: invert(0%) sepia(100%) saturate(15%) hue-rotate(237deg) brightness(99%) contrast(104%);
-  background-color: var(--bgc-color);
+  background: #f8fafc;
+  color: #111827;
+
+  --text-main: #111827;
+  --text-secondary: #6b7280;
+}
+
+/* ========================= */
+/* 🧊 CARD FIX */
+/* ========================= */
+body.dark .card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.light .card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+/* ========================= */
+/* ✍️ TEXT FIX */
+/* ========================= */
+h2 {
+  color: var(--text-main);
+}
+
+.username,
+.joined,
+.bio {
+  color: var(--text-secondary);
+}
+
+/* ========================= */
+/* 🔍 INPUT FIX */
+/* ========================= */
+input {
+  color: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+input::placeholder {
+  color: #9ca3af;
+}
+
+/* ========================= */
+/* 🔵 BUTTON / LINK */
+/* ========================= */
+.githubBtn {
+  color: #3b82f6;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.githubBtn:hover {
+  color: #60a5fa;
+}
+
+/* ========================= */
+/* ✨ OPTIONAL: SOFTER GLOW */
+/* ========================= */
+body.dark::before {
+  filter: blur(80px);
+  /* reduce from 100px */
+}
+
+body.dark::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background: radial-gradient(circle at 20% 30%,
+      rgba(255, 255, 255, 0.541),
+      transparent 40%),
+    radial-gradient(circle at 80% 70%,
+      rgba(145, 141, 141, 0.623),
+      transparent 40%);
+
+  filter: blur(100px);
+  z-index: -1;
+
+  animation: moveGlow 12s ease-in-out infinite alternate;
+}
+
+body.light::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background: radial-gradient(circle at 30% 20%,
+      rgba(57, 127, 240, 0.466),
+      transparent 70%),
+    radial-gradient(circle at 70% 80%,
+      rgba(146, 51, 234, 0.493),
+      transparent 70%);
+
+  filter: blur(80px);
+  z-index: -1;
+
+  animation: moveGlow 15s ease-in-out infinite alternate;
 }
 
 a {
@@ -58,4 +177,18 @@ a {
 
 .not-available {
   color: var(--stats-color);
+}
+
+@keyframes moveGlow {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+
+  50% {
+    transform: translate(-10%, 10%) scale(1.15);
+  }
+
+  100% {
+    transform: translate(10%, -10%) scale(1);
+  }
 }
