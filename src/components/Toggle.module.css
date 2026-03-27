@@ -29,7 +29,7 @@
 }
 
 .toggle input[type="checkbox"]:checked~label::after {
-  background-color: #0054b0;
+  background-color: #2e2f30;
   transform: translateX(50px);
 }
 
@@ -37,10 +37,10 @@
   text-transform: uppercase;
 }
 
-.dark {
+body.dark {
   color: #a5a5a5;
 }
 
-.light {
+body.light {
   color: #ffffff;
 }
